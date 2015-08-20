@@ -19,7 +19,7 @@ class Email
   end
 
   def deliver_gmail(recipient, subject, body)
-   #add gmail 
+    gmail = Gmail.connect('word.assassins@gmail.com', 'susanandnancy')
     gmail.deliver do
       # binding.pry email=Mail.new
       to "#{recipient}"
