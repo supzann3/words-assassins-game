@@ -13,8 +13,22 @@ class Player < ActiveRecord::Base
   #   end
   # end
 
+  def self.initial_victim_id_assignment
+    self.all.each do |player|
+      if player.id < self.all.size
+        player.update_attribute(:victim_id, player.id + 1)
+      else
+        player.update_attribute(:victim_id, 1)
+      end
+    end
+  end
+
   def initial_victim_id_assignment
-    id < Player.all.size ? id + 1 : 1
+    if self.id < Player.all.size
+      self.update_attribute(:victim_id, self.id + 1)
+    else
+      self.update_attribute(:victim_id, 1)
+    end
   end
 
   def reassign_victim_upon_successful_assassination
