@@ -13,7 +13,7 @@ class Player < ActiveRecord::Base
   #   end
   # end
 
-  def victim_id
+  def initial_victim_id_assignment
     id < Player.all.size ? id + 1 : 1
   end
 
