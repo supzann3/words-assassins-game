@@ -23,6 +23,10 @@ class Player < ActiveRecord::Base
     end
   end
 
+  def victim_name
+    Player(victim_id).name
+  end
+
   def initial_victim_id_assignment
     if self.id < Player.all.size
       self.update_attribute(:victim_id, self.id + 1)
@@ -35,8 +39,14 @@ class Player < ActiveRecord::Base
     victim_id = victim.victim_id
   end
 
-  def victim_name
-    Player(victim_id).name
+  def assassin
+    Player.find(:victim_id, self.id)
+  end
+
+  def dies
+    assassin.reassign_victim_upon_successful_assassination
+    self.update_attribute(:alive?, false)
+    #send assassin new e-mail
   end
 
 end
