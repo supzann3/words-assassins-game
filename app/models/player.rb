@@ -13,6 +13,10 @@ class Player < ActiveRecord::Base
   #   end
   # end
 
+  def continued_victim_pool?
+    self.id < Player.all.size
+  end
+
   def self.initial_victim_id_assignment
     self.all.each do |player|
       if player.id < self.all.size
@@ -27,16 +31,22 @@ class Player < ActiveRecord::Base
     Player(victim_id).name
   end
 
-  def initial_victim_id_assignment
-    if self.id < Player.all.size
-      self.update_attribute(:victim_id, self.id + 1)
-    else
-      self.update_attribute(:victim_id, 1)
-    end
+
+
+  def loop_to_find_victim
+    self.update_attribute(:victim_id, self.id + 1)
+  end
+
+  def choose_next_victim
+    self.update_attribute(:victim_id, 1)
   end
 
   def reassign_victim_upon_successful_assassination
     victim_id = victim.victim_id
+  end
+
+  def initial_victim_id_assignment
+    continued_victim_pool? ? choose_next_victim : loop_to_find_victim
   end
 
   def assassin
@@ -46,7 +56,6 @@ class Player < ActiveRecord::Base
   def dies
     assassin.reassign_victim_upon_successful_assassination
     self.update_attribute(:alive?, false)
-    #send assassin new e-mail
   end
 
 end
