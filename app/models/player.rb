@@ -1,5 +1,5 @@
 class Player < ActiveRecord::Base
-
+  include Word
   # def assign_victim_id
   #   x = self.id + 1
   #   loop do
@@ -44,6 +44,12 @@ class Player < ActiveRecord::Base
   def initial_victim_id_assignment
     continued_victim_pool? ? choose_next_victim : loop_to_find_victim
     Email.new.initial_email(self.email, victim.word, victim.name)
+  end
+
+  def self.word_assignment
+    Player.all.each do |player|
+      player.update_attribute(:word, Word.word_list.shuffle[0])
+    end
   end
 
   def continued_victim_pool?
