@@ -13,6 +13,18 @@ class Player < ActiveRecord::Base
   #   end
   # end
 
+  def initial_victim_id_assignment
+    continued_victim_pool? ? choose_next_victim : loop_to_find_victim
+    Email.new.initial_email(self.email, victim.word, victim.name)
+  end
+
+  def dies
+    assassin.reassign_victim_upon_successful_assassination
+    self.update_attribute(:alive?, false)
+    Email.new.reassigning_email(assassin.email, victim.name victim.word)
+    Email.new.dead_email(self.email, assassin.name)
+  end
+
   def continued_victim_pool?
     self.id < Player.all.size
   end
@@ -27,11 +39,9 @@ class Player < ActiveRecord::Base
     end
   end
 
-  def victim_name
-    Player(victim_id).name
+  def victim
+    Player(victim_id)
   end
-
-
 
   def loop_to_find_victim
     self.update_attribute(:victim_id, self.id + 1)
@@ -45,17 +55,10 @@ class Player < ActiveRecord::Base
     victim_id = victim.victim_id
   end
 
-  def initial_victim_id_assignment
-    continued_victim_pool? ? choose_next_victim : loop_to_find_victim
-  end
-
   def assassin
     Player.find(:victim_id, self.id)
   end
 
-  def dies
-    assassin.reassign_victim_upon_successful_assassination
-    self.update_attribute(:alive?, false)
-  end
+
 
 end
