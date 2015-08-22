@@ -33,6 +33,7 @@ class Player < ActiveRecord::Base
     else
       self.update_attribute(:victim_id, 1)
     end
+    #Email.initial_email(name,players_email,words)
   end
 
   def reassign_victim_upon_successful_assassination
@@ -47,6 +48,7 @@ class Player < ActiveRecord::Base
     assassin.reassign_victim_upon_successful_assassination
     self.update_attribute(:alive?, false)
     #send assassin new e-mail
+    #Email.reassigning_email(player_email,word,victim)
   end
 
 end
