@@ -1,5 +1,5 @@
 class Player < ActiveRecord::Base
-  include Word
+  # include Word
   # def assign_victim_id
   #   x = self.id + 1
   #   loop do

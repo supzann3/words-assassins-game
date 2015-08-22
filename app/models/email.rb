@@ -2,9 +2,13 @@ require 'gmail'
 class Email #<<ActiveRecord::Base # not sure if we should create a table for email
  # belongs_to :player
 
+    def initialize
+      keys = YAML.load_file('keys.yml')
+      @gmail = Gmail.connect(keys['EMAIL'], keys['PASSWORD'])
+    end
+
     def deliver_gmail(recipient, subject, body)
-     gmail=Gmail.connect("word.assassins@gmail.com", "susanandnancy") do |gmail|
-      gmail.deliver do
+      @gmail.deliver do
         # binding.pry email=Mail.new
         to "#{recipient}"
         subject "#{subject}"
@@ -18,7 +22,6 @@ class Email #<<ActiveRecord::Base # not sure if we should create a table for ema
         # add_file "/path/to/some_image.jpg" add image
       end
     end
-  end
 
 
   def initial_email(player_email,word,victim) #comes from Player
