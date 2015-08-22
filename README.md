@@ -3,6 +3,15 @@ This game requires more than 3 people to play. It consists of a killer and a vic
 
 Note: Do not disclose the word to your victim or other killers. </br>
 
+<<<<<<< HEAD
+#Game Rules:
+1. Participants would need to submit a list of names and e-mails.</br>
+2. Once the names with the emails are received each person would be assigned with a word.
+3. Individual e-mails would be sent to each person with a victim's name and a word.
+4. Throughout the course of the game you would have to send "Mission Accomplished", if you were able to killed your victim.
+5. If you are killed a confirmation email will be send to you to verify if you were killed. Reply to the email with "I have been killed".
+6. Another victim's name and word will be reassigned to you via email.
+=======
 Game Rules: </br>
 1. Participants would need to submit a list of names and e-mails. </br>
 2. Once the names with the emails are received each person would be assigned with a word. </br>
@@ -15,3 +24,4 @@ Game Rules: </br>
 
 #Project Description
 The project has been built with the Object Oriented Language Ruby as the backbone of the game and a Gmail Gem that will help as a tool for the medium of sending and receiving emails. SQL will be use to store and manage the data for names, emails, and words from the users' input. The description will be to be continue based on the trajectory of the project.....
+>>>>>>> 3692f2233422b8c6147d42ad870c65a52cb66360
