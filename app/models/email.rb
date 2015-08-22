@@ -1,10 +1,11 @@
 require 'gmail'
+require 'net/imap'
 class Email #<<ActiveRecord::Base # not sure if we should create a table for email
 # belongs_to :player
 
    def initialize
-     keys = YAML.load_file('keys.yml')
-     @gmail = Gmail.connect(keys['EMAIL'], keys['PASSWORD'])
+     @keys = YAML.load_file('keys.yml')
+     @gmail = Gmail.connect(@keys['EMAIL'], @keys['PASSWORD'])
    end
 
    def deliver_gmail(recipient, subject, body)
@@ -57,4 +58,14 @@ class Email #<<ActiveRecord::Base # not sure if we should create a table for ema
    deliver_gmail(recipient, subject, body)
    puts "Sent e-mail to #{player_email}."
  end
+ # def fetch_mail
+ #     @imap=Net::IMAP.new('keys[EMAIL]')
+ #     @imap=@imap.login(@keys['EMAIL'], @keys['PASSWORD'])
+ #     @imap.select('INBOX')
+ #     subject_id = search_mail(@imap, 'Dead', 'hawa.nancy@gmail.com')
+ #     subject_message = @imap.fetch(subject_id,'RFC822')[0].attr['RFC822']
+ #     mail = Mail.read_from_string subject_message
+ #     body_message = mail.html_part.body
+ #     binding.pry
+ # end
 end

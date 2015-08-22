@@ -1,4 +1,5 @@
 class Player < ActiveRecord::Base
+  has_many :receive_emails
  # include Word
  # def assign_victim_id
  #   x = self.id + 1
