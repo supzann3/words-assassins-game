@@ -3,6 +3,8 @@ require 'net/imap'
 class Email #<<ActiveRecord::Base # not sure if we should create a table for email
 # belongs_to :player
 
+  attr_reader :gmail
+
    def initialize
      @keys = YAML.load_file('keys.yml')
      @gmail = Gmail.connect(@keys['EMAIL'], @keys['PASSWORD'])
@@ -68,4 +70,16 @@ class Email #<<ActiveRecord::Base # not sure if we should create a table for ema
  #     body_message = mail.html_part.body
  #     binding.pry
  # end
+
+ def check_email
+   binding.pry
+   @gmail.inbox.all.each do |email|
+     re = ReceieveEmail.new
+
+     sender_id = Player.find_by(:email, email.from).id
+
+     re.update_attribute(:subject, email.subject)
+     re.update_attribute(:sender_id, sender_id)
+   end
+ end
 end
