@@ -14,10 +14,21 @@ class ReceiveEmail < ActiveRecord::Base
       if !!sender
         sid = sender.id
         re.update_attribute(:subject, email.subject)
-        re.update_attribute(:sender_id, sid)
+        re.update_attribute(:player_id, sid)
       end
       email.read!
       email.archive!
     end
   end
+
+  def email_contains_dead_words?
+    !!(subject.include?("dead") || subject.include?("killed") || subject.include?("quit"))
+  end
+
+  def kill_victim
+    if email_contains_dead_words
+        Player.find(player_id).update_attribute(:alive?, false)
+    end
+  end
+
 end
