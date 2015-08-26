@@ -14,14 +14,11 @@ class ReceiveEmail < ActiveRecord::Base
         re.player_id = sender.id
         sender.dies if re.contains_dead_words?
       end
-
-      email.read!
-      email.archive!
+      email.delete!
     end
   end
 
   def contains_dead_words?
     !!(subject.downcase.include?("dead") || subject.downcase.include?("killed") || subject.downcase.include?("quit"))
   end
-
 end

@@ -2,6 +2,7 @@ class Player < ActiveRecord::Base
   has_many :receive_emails
 
  def dies
+   binding.pry
    Email.new.reassigning_email(assassin.email, victim.word, victim.name)
    Email.new.dead_email(self.email, assassin.name)
    self.update_attribute(:alive?, false)
@@ -67,6 +68,5 @@ class Player < ActiveRecord::Base
      Email.new.winner_email(player.email, winner)
    end
  end
-
 
 end
