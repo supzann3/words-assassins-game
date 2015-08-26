@@ -71,15 +71,5 @@ class Email #<<ActiveRecord::Base # not sure if we should create a table for ema
  #     binding.pry
  # end
 
- def check_email
-   binding.pry
-   @gmail.inbox.all.each do |email|
-     re = ReceieveEmail.new
 
-     sender_id = Player.find_by(:email, email.from).id
-
-     re.update_attribute(:subject, email.subject)
-     re.update_attribute(:sender_id, sender_id)
-   end
- end
 end

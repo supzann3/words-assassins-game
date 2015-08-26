@@ -5,30 +5,23 @@ class ReceiveEmail < ActiveRecord::Base
     @@gmail = Gmail.connect(@@keys['EMAIL'], @@keys['PASSWORD'])
 
   def self.check_email
-
     @@gmail.inbox.all.each do |email|
       re = ReceiveEmail.new
-
       sender = (Player.find_by email: email.message.from)
 
       if !!sender
-        sid = sender.id
-        re.update_attribute(:subject, email.subject)
-        re.update_attribute(:player_id, sid)
+        re.subject = email.subject
+        re.player_id = sender.id
+        sender.dies if re.contains_dead_words?
       end
+
       email.read!
       email.archive!
     end
   end
 
-  def email_contains_dead_words?
-    !!(subject.include?("dead") || subject.include?("killed") || subject.include?("quit"))
-  end
-
-  def kill_victim
-    if email_contains_dead_words
-        Player.find(player_id).update_attribute(:alive?, false)
-    end
+  def contains_dead_words?
+    !!(subject.downcase.include?("dead") || subject.downcase.include?("killed") || subject.downcase.include?("quit"))
   end
 
 end
