@@ -1,0 +1,99 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+body {
+  background-color: #70BBD9;
+  text-align: center;
+  font-family: 'open sans';
+  padding: 2%;
+}
+
+.clearfix:after {
+	content: ".";
+	display: block;
+	clear: both;
+	visibility: hidden;
+	height: 0;
+	line-height: 0;
+}
+
+.player_status_container {
+  width: 29%;
+  float: left;
+  margin-bottom: 3em;
+  margin-right: 2%;
+  margin-left: 2%;
+}
+
+.player_wrapper {
+  width: 29%;
+  float: left;
+  margin-left: 2%;
+  margin-right: 2%;
+  border: 1px black solid;
+}
+
+.player_name {
+  height: 200px;
+  vertical-align: center;
+  font-size: 3em;
+  width: 100%;
+  background-color: white;
+}
+
+.status_bar {
+  background-color: #FCF232;
+}
+
+.player_status, .player_kills {
+  border-right: 2px white;
+  width: 50%;
+}
+
+.player_status, .player_kills {
+  font-size: 1.5em;
+  width: 50%;
+  float: left;
+}
+
+.kill_button_wrapper {
+  float: right;
+  margin: auto;
+  clear: both;
+  width: 100%;
+  background-color: red;
+  font-size: 1.5em;
+  height: 45px;
+}
+
+.dead_button_wrapper {
+  float: right;
+  margin: auto;
+  clear: both;
+  width: 100%;
+  background-color: black;
+  color: grey;
+  font-size: 2em;
+  height: 45px;
+}
+
+.logo_image {
+  width: 15%;
+  float: left;
+  margin-bottom: 3em;
+}
+
+header {
+  width = 100%;
+}
+
+.content_clearfix {
+  margin-top: 4em;
+  width = 100%;
+  clear: both
+}

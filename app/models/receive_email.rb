@@ -6,6 +6,7 @@ class ReceiveEmail < ActiveRecord::Base
 
   def self.check_email
     @@gmail.inbox.all.each do |email|
+      # binding.pry
       re = ReceiveEmail.new
       sender = (Player.find_by email: email.message.from)
 
@@ -13,12 +14,17 @@ class ReceiveEmail < ActiveRecord::Base
         re.subject = email.subject
         re.player_id = sender.id
         sender.dies if re.contains_dead_words?
+        sender.victim.send_death_notice
       end
-      email.delete!
+
     end
   end
 
   def contains_dead_words?
     !!(subject.downcase.include?("dead") || subject.downcase.include?("killed") || subject.downcase.include?("quit"))
+  end
+
+  def contains_victory_words?
+    !!(subject.downcase.include?("victorious") || subject.downcase.include?("win") || subject.downcase.include?("vanquish") || subject.downcase.include?("won"))
   end
 end

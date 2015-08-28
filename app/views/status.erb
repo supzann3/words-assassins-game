@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Words Assassins - Status</title>
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body>
+
+
+    <div class = 'header clearfix'>
+      <img class = 'logo_image' src='images/logo.jpg'>
+    </div>
+
+  <div class="content clearfix">
+
+  <% @players.each do |player| %>
+    <!-- <div class='player_wrapper clearfix'> -->
+      <div class='player_status_container clearfix'>
+        <div class='player_name'>
+          <%= player.name %>
+        </div>
+        <div class="status_bar clearfix">
+          <div class ='player_status'>
+            <%= player.alive? ? "ALIVE" : "DEAD" %>
+          </div>
+          <div class ='player_kills'>
+            <%= player.kills %> KILLS
+          </div>
+        </div>
+        <% if player.alive? %>
+        <div class ='kill_button_wrapper'>
+          <form action="/status" method="post">
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="hidden" name="player[id]" value="<%= player.id %>">
+            <input class ='kill_button_wrapper' type="submit" value="KILL ME">
+          </form>
+        </div>
+        <% else %>
+        <div class ='dead_button_wrapper'>
+          I'M ALREADY DEAD
+        </div>
+        <% end %>
+      </div>
+    <!-- </div> -->
+  <% end %>
+
+</div>
+
+  </body>
+</html>
