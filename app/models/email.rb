@@ -11,6 +11,8 @@ class Email #<<ActiveRecord::Base # not sure if we should create a table for ema
    def deliver_gmail(recipient, subject, body)
      @gmail.deliver do
        # binding.pry email=Mail.new
+       template=File.open('email-template.erb')
+       result=ERB.new(template).result(binding)
        to "#{recipient}"
        subject "#{subject}"
        text_part do
@@ -29,8 +31,11 @@ class Email #<<ActiveRecord::Base # not sure if we should create a table for ema
    # players_email.each do |player| #either to a iteration at Player's class or pass an array here
      recipient = player_email
      subject = "Your secret mission."
-     body = "You have been assigned to kill #{victim}. \n You can accomplish this by getting your victim to say the word #{word}"
-     deliver_gmail(recipient, subject, body)
+     @body = "You have been assigned to kill #{victim}. \n You can accomplish this by getting your victim to say the word #{word}"
+     file=File.read("app/views/email-template.erb")
+     binding.pry
+     html=ERB.new(file).result(binding)
+     deliver_gmail(recipient, subject, html)
      puts "Sent e-mail to #{player_email}."
    # end
  end

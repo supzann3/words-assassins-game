@@ -1,3 +1,3 @@
-class ReceiveEmail <<Activerecord::Base
+class ReceiveEmail <ActiveRecord::Base
   belongs_to :player
 end
