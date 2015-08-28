@@ -71,6 +71,16 @@ body {
   height: 45px;
 }
 
+.kill_button_wrapper:hover {
+  float: right;
+  margin: auto;
+  clear: both;
+  width: 100%;
+  background-color: red;
+  font-size: 1.5em;
+  height: 45px;
+}
+
 .dead_button_wrapper {
   float: right;
   margin: auto;

@@ -14,10 +14,15 @@ class Player < ActiveRecord::Base
    assassin.update_attribute(:kills, assassin.kills + 1)
  end
 
+ def send_death_notice
+  Email.new.confirmation_of_death(self.email, assassin.name, word)
+ end
+
  def self.initial_victim_id_assignment
    self.all.each do |player|
      player.initial_victim_id_assignment
      player.update_attribute(:alive?, true)
+     player.update_attribute(:kills, 0)
    end
  end
 

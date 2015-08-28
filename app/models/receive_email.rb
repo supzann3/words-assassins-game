@@ -14,7 +14,7 @@ class ReceiveEmail < ActiveRecord::Base
         re.subject = email.subject
         re.player_id = sender.id
         sender.dies if re.contains_dead_words?
-        sender.victim.send_death_notice
+        sender.victim.send_death_notice if re.contains_victory_words?
       end
 
     end
