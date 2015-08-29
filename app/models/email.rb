@@ -15,7 +15,6 @@ class Email #<<ActiveRecord::Base # not sure if we should create a table for ema
        binding.pry
        to "#{recipient}"
        subject "#{subject}"
-
        html_part do
         content_type 'text/html; charset=UTF-8'
         body "<p>#{body}</p>" # add html part
@@ -41,24 +40,28 @@ class Email #<<ActiveRecord::Base # not sure if we should create a table for ema
  def reassigning_email(player_email,word,victim) #comes from Player
      recipient = player_email
      subject = "Your new victim"
-     body = "You have a new victim to kill #{victim}. \n You can accomplish this by getting your victim to say the word #{word}"
+     body = "Your next victim is #{victim}. \n You can accomplish this by getting your victim to say the word #{word}"
      deliver_gmail(recipient, subject, body)
      puts "Sent e-mail to #{player_email}."
  end
 
  def dead_email(player_email,killer_name) #comes from Player
    recipient = player_email
-   subject = "Your have been killed"
-   body = "You have been killed by #{killer_name}, better luck next time. \n Thank you for playing !"
-   deliver_gmail(recipient, subject, body)
+   subject = "You have been killed"
+   @body = "You have been killed by #{killer_name}, better luck next time. \n Thank you for playing !"
+   file=File.read("app/views/email-template.erb")
+   html=ERB.new(file).result(binding)
+   deliver_gmail(recipient, subject, html)
    puts "Sent e-mail to #{player_email}."
  end
 
  def winner_email(player_email,winner_name) #comes from Player
    recipient = player_email
    subject = "The winner has been announced"
-   body = "The winner of the game is #{winner_name}"
-   deliver_gmail(recipient, subject, body)
+   @body = "The winner of the game is #{winner_name}"
+   file=File.read("app/views/email-template.erb")
+   html=ERB.new(file).result(binding)
+   deliver_gmail(recipient, subject, html)
    puts "Sent e-mail to #{player_email}."
  end
 

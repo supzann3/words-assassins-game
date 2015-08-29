@@ -1,0 +1,12 @@
+<!-- need to get another page with @number as an input-->
+<form action="/players" method="post">
+  <%@number.times.do%>
+  <div>
+    <label for="name"></label>
+    <input id="name" type="text" name="player[name][]" value="<%= player.name %>">
+    <label for="email"></label>
+    <input id="email" type="text" name="player[email][]" value="<%= player.email %>">
+  </div>
+  <input type="submit" value="Enter Players">
+  <%end%>
+</form>

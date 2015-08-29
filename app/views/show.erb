@@ -1,0 +1,7 @@
+<h2>Players List</h2>
+<ul>
+  <% @players.each do |player| %>
+    <li><%= player.name %></li>
+    <li><%= player.email %></li>
+  <% end %>
+</ul>
