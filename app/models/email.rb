@@ -12,7 +12,7 @@ class Email #<<ActiveRecord::Base # not sure if we should create a table for ema
 
    def deliver_gmail(recipient, subject, body)
      @gmail.deliver do
-       binding.pry
+       # binding.pry
        to "#{recipient}"
        subject "#{subject}"
        html_part do
