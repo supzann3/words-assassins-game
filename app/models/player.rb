@@ -2,6 +2,7 @@ class Player < ActiveRecord::Base
   has_many :receive_emails
 
  def dies
+   victim.assign_word
    Email.new.reassigning_email(assassin.email, victim.word, victim.name)
    Email.new.dead_email(self.email, assassin.name)
    self.update_attribute(:alive?, false)
@@ -39,10 +40,24 @@ class Player < ActiveRecord::Base
    Email.new.initial_email(self.email, victim.word, victim.name)
  end
 
- def self.word_assignment
+
+ def initial_victim_id_assignment_mg
+   #for this to work, we need a game_players table.  The ids will be game player ids.
+   #The following methods would need to be changed.
+    #1.  continued_victim_pool?
+    #2.  initial_victim_id_assignment
+    #3.  choose_next_victim
+    #4.  loop_to_find_victim
+ end
+
+ def self.assign_words
    Player.all.each do |player|
-     player.update_attribute(:word, Word.word_list.shuffle[0])
+     assign_word
    end
+ end
+
+ def assign_word
+  update_attribute(:word, Word.word_list.sample)
  end
 
  def continued_victim_pool?

@@ -19,6 +19,13 @@
         <div class='player_name'>
           <%= player.name %>
         </div>
+        <div class='ninja picture'>
+          <% if player.alive? %>
+            <img class = 'ninja' src='images/alive.png'>
+          <% else %>
+          <img class = 'ninja' src='images/dead.png'>
+          <% end %>
+        </div>
         <div class="status_bar clearfix">
           <div class ='player_status'>
             <%= player.alive? ? "ALIVE" : "DEAD" %>

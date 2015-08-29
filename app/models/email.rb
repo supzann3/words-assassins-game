@@ -12,7 +12,7 @@ class Email #<<ActiveRecord::Base # not sure if we should create a table for ema
 
    def deliver_gmail(recipient, subject, body)
      @gmail.deliver do
-       binding.pry
+       # binding.pry
        to "#{recipient}"
        subject "#{subject}"
 
@@ -39,11 +39,11 @@ class Email #<<ActiveRecord::Base # not sure if we should create a table for ema
  end
 
  def reassigning_email(player_email,word,victim) #comes from Player
-     recipient = player_email
-     subject = "Your new victim"
-     body = "You have a new victim to kill #{victim}. \n You can accomplish this by getting your victim to say the word #{word}"
-     deliver_gmail(recipient, subject, body)
-     puts "Sent e-mail to #{player_email}."
+   recipient = player_email
+   subject = "Your new victim"
+   body = "You have a new victim to kill #{victim}. \n You can accomplish this by getting your victim to say the word #{word}"
+   deliver_gmail(recipient, subject, body)
+   puts "Sent e-mail to #{player_email}."
  end
 
  def dead_email(player_email,killer_name) #comes from Player

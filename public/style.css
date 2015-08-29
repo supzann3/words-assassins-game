@@ -7,7 +7,7 @@
 }
 
 body {
-  background-color: #70BBD9;
+  /*background-color: #375A7F;*/
   text-align: center;
   font-family: 'open sans';
   padding: 2%;
@@ -28,6 +28,8 @@ body {
   margin-bottom: 3em;
   margin-right: 2%;
   margin-left: 2%;
+	background-color: white;
+	border: 1px black solid;
 }
 
 .player_wrapper {
@@ -39,15 +41,16 @@ body {
 }
 
 .player_name {
-  height: 200px;
   vertical-align: center;
   font-size: 3em;
   width: 100%;
-  background-color: white;
+  background-color: #3498DB;
+	color: white;
 }
 
 .status_bar {
-  background-color: #FCF232;
+  background-color: #3498DB;
+	color: white;
 }
 
 .player_status, .player_kills {
@@ -66,7 +69,7 @@ body {
   margin: auto;
   clear: both;
   width: 100%;
-  background-color: red;
+  background-color: #E74C3C;
   font-size: 1.5em;
   height: 45px;
 }
@@ -76,9 +79,10 @@ body {
   margin: auto;
   clear: both;
   width: 100%;
-  background-color: red;
+  background-color: #F39C12;
   font-size: 1.5em;
   height: 45px;
+	color: white;
 }
 
 .dead_button_wrapper {
@@ -86,8 +90,8 @@ body {
   margin: auto;
   clear: both;
   width: 100%;
-  background-color: black;
-  color: grey;
+  background-color: #464545;
+  color: white;
   font-size: 2em;
   height: 45px;
 }
@@ -96,6 +100,11 @@ body {
   width: 15%;
   float: left;
   margin-bottom: 3em;
+}
+
+.ninja {
+	height: 200px;
+  margin: auto;
 }
 
 header {
