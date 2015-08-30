@@ -11,6 +11,7 @@ body {
   text-align: center;
   font-family: 'open sans';
   padding: 2%;
+	color: black;
 }
 
 .clearfix:after {
